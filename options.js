@@ -3,6 +3,7 @@ class ToolipOptions {
   constructor() {
     this.sites = [];
     this.draggedItem = null;
+    this.editingIndex = -1; // 현재 편집 중인 사이트 인덱스
     this.init();
   }
 
@@ -109,10 +110,24 @@ class ToolipOptions {
         <div class="site-url">${site.url}</div>
       </div>
       <div class="site-actions">
-        <button class="edit-btn" onclick="toolipOptions.editSite(${index})">✏️</button>
-        <button class="delete-btn" onclick="toolipOptions.deleteSite(${index})">🗑️</button>
+        <button class="edit-btn" data-index="${index}">✏️</button>
+        <button class="delete-btn" data-index="${index}">🗑️</button>
       </div>
     `;
+
+    // 편집 버튼 이벤트 리스너 추가
+    const editBtn = div.querySelector('.edit-btn');
+    editBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.editSite(index);
+    });
+
+    // 삭제 버튼 이벤트 리스너 추가
+    const deleteBtn = div.querySelector('.delete-btn');
+    deleteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.deleteSite(index);
+    });
 
     // Drag and drop
     div.addEventListener('dragstart', (e) => this.handleDragStart(e, index));
@@ -141,7 +156,7 @@ class ToolipOptions {
       return;
     }
 
-    const newSite = {
+    const siteData = {
       id: ToolipStorage.generateId(),
       url: url,
       title: name,
@@ -149,25 +164,55 @@ class ToolipOptions {
       category: 'custom'
     };
 
-    this.sites.push(newSite);
+    if (this.editingIndex >= 0) {
+      // 편집 모드: 기존 사이트 업데이트
+      siteData.id = this.sites[this.editingIndex].id; // 기존 ID 유지
+      this.sites[this.editingIndex] = siteData;
+      this.editingIndex = -1;
+      document.getElementById('add-site-btn').textContent = 'Add Site';
+    } else {
+      // 새 사이트 추가
+      this.sites.push(siteData);
+    }
+    
     this.renderSitesList();
     this.clearAddForm();
   }
 
   editSite(index) {
     const site = this.sites[index];
+    
+    // 폼에 기존 데이터 채우기
     document.getElementById('site-url').value = site.url;
     document.getElementById('site-name').value = site.title;
     document.getElementById('icon-url').value = site.icon;
     this.previewIconUrl(site.icon);
     
-    // Remove the site and let user re-add it
-    this.deleteSite(index);
+    // 편집 모드로 설정
+    this.editingIndex = index;
+    document.getElementById('add-site-btn').textContent = 'Update Site';
+    
+    // 폼으로 스크롤
+    document.querySelector('.add-site-section').scrollIntoView({ 
+      behavior: 'smooth' 
+    });
   }
 
   deleteSite(index) {
-    if (confirm('Are you sure you want to remove this site?')) {
+    const site = this.sites[index];
+    if (confirm(`Are you sure you want to remove "${site.title}"?`)) {
       this.sites.splice(index, 1);
+      
+      // 편집 중인 사이트가 삭제된 경우 편집 모드 해제
+      if (this.editingIndex === index) {
+        this.editingIndex = -1;
+        this.clearAddForm();
+        document.getElementById('add-site-btn').textContent = 'Add Site';
+      } else if (this.editingIndex > index) {
+        // 편집 중인 사이트 인덱스 조정
+        this.editingIndex--;
+      }
+      
       this.renderSitesList();
     }
   }
@@ -319,6 +364,10 @@ class ToolipOptions {
     document.getElementById('site-name').value = '';
     document.getElementById('icon-url').value = '';
     document.getElementById('preview-icon').style.display = 'none';
+    
+    // 편집 모드 해제
+    this.editingIndex = -1;
+    document.getElementById('add-site-btn').textContent = 'Add Site';
   }
 
   // Drag and Drop functionality

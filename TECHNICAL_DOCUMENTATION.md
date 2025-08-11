@@ -1107,10 +1107,11 @@ class ToolipStorage {
  * Advanced Options Page Management
  * Handles site CRUD operations, theme management, and data backup/restore
  */
-class ToolipOptionsManager {
+class ToolipOptions {
   constructor() {
     this.sites = [];
-    this.editingIndex = -1;
+    this.draggedItem = null;
+    this.editingIndex = -1; // 현재 편집 중인 사이트 인덱스
     this.init();
   }
 
@@ -1118,15 +1119,26 @@ class ToolipOptionsManager {
    * Initialize the options page with event listeners and data loading
    */
   async init() {
-    // Load existing data
+    // Load storage utility
+    await this.loadScript('storage.js');
+    
+    // Load current sites
     await this.loadSites();
-    await this.loadTheme();
-
+    
     // Setup event listeners
     this.setupEventListeners();
-
-    // Render initial state
+    
+    // Render sites list
     this.renderSitesList();
+  }
+
+  async loadScript(src) {
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = src;
+      script.onload = resolve;
+      document.head.appendChild(script);
+    });
   }
 
   /**
@@ -1135,7 +1147,7 @@ class ToolipOptionsManager {
   setupEventListeners() {
     // Site management
     document.getElementById('add-site-btn').addEventListener('click', () => this.addSite());
-    document.getElementById('save-btn').addEventListener('click', () => this.saveChanges());
+    document.getElementById('save-btn').addEventListener('click', () => this.saveSettings());
     document.getElementById('cancel-btn').addEventListener('click', () => this.cancelChanges());
 
     // Theme management
@@ -1158,35 +1170,36 @@ class ToolipOptionsManager {
     document.getElementById('import-file').addEventListener('change', (e) => this.importSettings(e));
     document.getElementById('reset-btn').addEventListener('click', () => this.resetToDefault());
 
-    // Icon preview
-    document.getElementById('site-icon').addEventListener('input', (e) => this.previewIcon(e.target.value));
+    // Auto-detect icon
+    document.getElementById('auto-icon-btn').addEventListener('click', () => this.autoDetectIcon());
+    
+    // Upload custom icon
+    document.getElementById('upload-icon-btn').addEventListener('click', () => {
+      document.getElementById('custom-icon').click();
+    });
+    
+    document.getElementById('custom-icon').addEventListener('change', (e) => this.handleCustomIcon(e));
+    
+    // Icon URL input
+    document.getElementById('icon-url').addEventListener('input', (e) => this.previewIconUrl(e.target.value));
+    
+    // Site URL input for auto-detection
+    document.getElementById('site-url').addEventListener('input', (e) => {
+      if (e.target.value) {
+        this.autoFillSiteInfo(e.target.value);
+      }
+    });
   }
 
-  /**
-   * Load and display existing sites from storage
-   */
   async loadSites() {
-    try {
-      this.sites = await ToolipStorage.getSites();
-    } catch (error) {
-      console.error('Error loading sites:', error);
-      this.sites = ToolipStorage.getDefaultSites();
-    }
+    this.sites = await ToolipStorage.getSites();
+    await this.loadTheme();
   }
 
-  /**
-   * Load and apply current theme
-   */
   async loadTheme() {
-    try {
-      const theme = await ToolipStorage.getTheme();
-      document.body.className = theme + '-theme';
-      document.getElementById('theme-' + theme).checked = true;
-    } catch (error) {
-      console.error('Error loading theme:', error);
-      document.body.className = 'light-theme';
-      document.getElementById('theme-light').checked = true;
-    }
+    const theme = await ToolipStorage.getTheme();
+    document.getElementById(`theme-${theme}`).checked = true;
+    document.body.className = theme + '-theme';
   }
 
   /**
@@ -1210,10 +1223,24 @@ class ToolipOptionsManager {
           <div class="site-url">${site.url}</div>
         </div>
         <div class="site-actions">
-          <button type="button" class="edit-btn" onclick="optionsManager.editSite(${index})">✏️</button>
-          <button type="button" class="delete-btn" onclick="optionsManager.deleteSite(${index})">🗑️</button>
+          <button class="edit-btn" data-index="${index}">✏️</button>
+          <button class="delete-btn" data-index="${index}">🗑️</button>
         </div>
       `;
+
+      // 편집 버튼 이벤트 리스너 추가
+      const editBtn = siteElement.querySelector('.edit-btn');
+      editBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.editSite(index);
+      });
+
+      // 삭제 버튼 이벤트 리스너 추가
+      const deleteBtn = siteElement.querySelector('.delete-btn');
+      deleteBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.deleteSite(index);
+      });
 
       // Drag and drop functionality
       siteElement.addEventListener('dragstart', (e) => {
@@ -1248,12 +1275,12 @@ class ToolipOptionsManager {
    */
   addSite() {
     const url = document.getElementById('site-url').value.trim();
-    const title = document.getElementById('site-title').value.trim();
-    const icon = document.getElementById('site-icon').value.trim();
+    const name = document.getElementById('site-name').value.trim();
+    const iconUrl = document.getElementById('icon-url').value.trim();
 
     // Comprehensive validation
-    if (!url || !title) {
-      alert('Please fill in both URL and title fields.');
+    if (!url || !name) {
+      alert('Please fill in both URL and name fields.');
       return;
     }
 
@@ -1270,26 +1297,27 @@ class ToolipOptionsManager {
       return;
     }
 
-    const newSite = {
+    const siteData = {
       id: ToolipStorage.generateId(),
       url: url,
-      title: title,
-      icon: icon || ToolipStorage.getAutoIcon(url),
+      title: name,
+      icon: iconUrl || ToolipStorage.getAutoIcon(url),
       category: 'custom'
     };
 
     if (this.editingIndex >= 0) {
-      // Update existing site
-      this.sites[this.editingIndex] = newSite;
+      // 편집 모드: 기존 사이트 업데이트
+      siteData.id = this.sites[this.editingIndex].id; // 기존 ID 유지
+      this.sites[this.editingIndex] = siteData;
       this.editingIndex = -1;
       document.getElementById('add-site-btn').textContent = 'Add Site';
     } else {
-      // Add new site
-      this.sites.push(newSite);
+      // 새 사이트 추가
+      this.sites.push(siteData);
     }
-
-    this.clearForm();
+    
     this.renderSitesList();
+    this.clearAddForm();
   }
 
   /**
@@ -1297,15 +1325,21 @@ class ToolipOptionsManager {
    */
   editSite(index) {
     const site = this.sites[index];
-    document.getElementById('site-url').value = site.url;
-    document.getElementById('site-title').value = site.title;
-    document.getElementById('site-icon').value = site.icon;
     
+    // 폼에 기존 데이터 채우기
+    document.getElementById('site-url').value = site.url;
+    document.getElementById('site-name').value = site.title;
+    document.getElementById('icon-url').value = site.icon;
+    this.previewIconUrl(site.icon);
+    
+    // 편집 모드로 설정
     this.editingIndex = index;
     document.getElementById('add-site-btn').textContent = 'Update Site';
     
-    // Preview icon if available
-    this.previewIcon(site.icon);
+    // 폼으로 스크롤
+    document.querySelector('.add-site-section').scrollIntoView({ 
+      behavior: 'smooth' 
+    });
   }
 
   /**
@@ -1315,6 +1349,17 @@ class ToolipOptionsManager {
     const site = this.sites[index];
     if (confirm(`Are you sure you want to remove "${site.title}"?`)) {
       this.sites.splice(index, 1);
+      
+      // 편집 중인 사이트가 삭제된 경우 편집 모드 해제
+      if (this.editingIndex === index) {
+        this.editingIndex = -1;
+        this.clearAddForm();
+        document.getElementById('add-site-btn').textContent = 'Add Site';
+      } else if (this.editingIndex > index) {
+        // 편집 중인 사이트 인덱스 조정
+        this.editingIndex--;
+      }
+      
       this.renderSitesList();
     }
   }
@@ -1486,9 +1531,9 @@ class ToolipOptionsManager {
   }
 }
 
-// Initialize options manager when DOM is ready
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  window.optionsManager = new ToolipOptionsManager();
+  window.toolipOptions = new ToolipOptions();
 });
 ```
 
