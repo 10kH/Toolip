@@ -394,8 +394,8 @@ SOFTWARE.
 
 ## 📞 Contact
 
-- **Developer**: Woody Lee
-- **GitHub**: [Your GitHub Profile](https://github.com/10kH)
+- **Developer**: [Woody Lee](https://www.linkedin.com/in/writerwoody/)
+- **GitHub**: [10kH](https://github.com/10kH)
 - **Support**: [Buy me a coffee](https://buymeacoffee.com/woody.lee)
 - **Extension Page**: [Chrome Web Store](https://chrome.google.com/webstore) (link to be updated)
 
