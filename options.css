@@ -1,0 +1,435 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+header p {
+  color: #666;
+  font-size: 1.1em;
+}
+
+section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+section h2 {
+  font-size: 1.4em;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 8px;
+}
+
+/* Sites List */
+.sites-list {
+  display: grid;
+  gap: 12px;
+}
+
+.site-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+  cursor: grab;
+  transition: all 0.2s ease;
+}
+
+.site-item:hover {
+  background: #e9ecef;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.site-item.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+}
+
+.site-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 12px;
+  border: 1px solid #ddd;
+}
+
+.site-info {
+  flex: 1;
+}
+
+.site-name {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.site-url {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.site-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.site-actions button {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.edit-btn {
+  background: #3498db;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #2980b9;
+}
+
+.delete-btn {
+  background: #e74c3c;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #c0392b;
+}
+
+/* Add Form */
+.add-form {
+  display: grid;
+  gap: 20px;
+}
+
+.form-group {
+  display: grid;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.form-group input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.icon-options {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.icon-preview {
+  margin-top: 12px;
+}
+
+.icon-preview img {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* Preset Buttons */
+.preset-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+
+
+/* Backup Buttons */
+.backup-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.primary-btn {
+  background: #3498db;
+  color: white;
+}
+
+.primary-btn:hover {
+  background: #2980b9;
+}
+
+.secondary-btn {
+  background: #95a5a6;
+  color: white;
+}
+
+.secondary-btn:hover {
+  background: #7f8c8d;
+}
+
+.danger-btn {
+  background: #e74c3c;
+  color: white;
+}
+
+.danger-btn:hover {
+  background: #c0392b;
+}
+
+.large {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.save-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+/* Theme Options */
+.theme-options {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.theme-option input[type="radio"] {
+  margin-right: 8px;
+}
+
+.theme-preview {
+  padding: 12px 20px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.theme-option input[type="radio"]:checked + .theme-preview {
+  border-color: #3498db;
+  background-color: #3498db;
+  color: white;
+}
+
+.light-preview {
+  background-color: #fff;
+  color: #333;
+}
+
+.dark-preview {
+  background-color: #2a2a2a;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 16px;
+  }
+  
+  .save-buttons {
+    flex-direction: column;
+  }
+  
+  .icon-options {
+    flex-direction: column;
+  }
+  
+  .theme-options {
+    flex-direction: column;
+  }
+}
+
+/* Dark Theme for Options Page */
+body.dark-theme {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+}
+
+body.dark-theme header {
+  background: #2a2a2a;
+  color: #e0e0e0;
+}
+
+body.dark-theme header h1 {
+  color: #ffffff;
+}
+
+body.dark-theme header p {
+  color: #bbb;
+}
+
+body.dark-theme section {
+  background: #2a2a2a;
+  border: 1px solid #444;
+}
+
+body.dark-theme section h2 {
+  color: #ffffff;
+  border-bottom: 2px solid #444;
+}
+
+body.dark-theme .site-item {
+  background: #333;
+  border: 1px solid #444;
+}
+
+body.dark-theme .site-item:hover {
+  background: #3a3a3a;
+}
+
+body.dark-theme .site-name {
+  color: #ffffff;
+}
+
+body.dark-theme .site-url {
+  color: #bbb;
+}
+
+body.dark-theme .form-group input {
+  background: #333;
+  border: 1px solid #555;
+  color: #e0e0e0;
+}
+
+body.dark-theme .form-group input:focus {
+  border-color: #3498db;
+  background: #3a3a3a;
+}
+
+body.dark-theme .form-group label {
+  color: #ffffff;
+}
+
+
+
+body.dark-theme .primary-btn {
+  background: #3498db;
+  color: white;
+}
+
+body.dark-theme .secondary-btn {
+  background: #666;
+  color: white;
+}
+
+body.dark-theme .danger-btn {
+  background: #e74c3c;
+  color: white;
+}
+
+/* Credits Section */
+.credits-section {
+  text-align: center;
+  padding: 24px;
+  margin-top: 40px;
+  border-top: 1px solid #ddd;
+  background: #f9f9f9;
+}
+
+.credits-section p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.credits-section a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.credits-section a:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+/* Dark theme credits */
+body.dark-theme .credits-section {
+  background: #2a2a2a;
+  border-top: 1px solid #444;
+}
+
+body.dark-theme .credits-section p {
+  color: #ccc;
+}
+
+body.dark-theme .credits-section a {
+  color: #79acff;
+}
+
+body.dark-theme .credits-section a:hover {
+  color: #5c8fe6;
+}
