@@ -20,10 +20,6 @@ Toolip is a sophisticated Chrome extension that transforms your browsing experie
 - **☁️ Cloud Sync**: Settings synchronize across Chrome browsers
 - **📦 Backup/Restore**: Export/import your configuration
 
-## 🖼️ Screenshots
-
-> *Note: Add screenshots here when available*
-
 ## 🚀 Quick Start
 
 ### Installation
@@ -302,20 +298,6 @@ cd toolip
 3. Search existing issues on GitHub
 4. Create a new issue with detailed information
 
-## 🗺️ Roadmap
-
-### v1.2.0 (Planned)
-- 📂 **Site Categories**: Organize by type (AI, Dev, Productivity)
-- 🔍 **Search Function**: Quick site filtering
-- ⌨️ **Keyboard Navigation**: Full keyboard shortcuts
-- 🎨 **Custom Themes**: User-defined color schemes
-
-### v1.3.0+ (Future)
-- 👥 **Workspace Profiles**: Different site sets for work/personal
-- 📊 **Usage Analytics**: Track your most-used tools
-- 🔗 **API Integrations**: Connect with productivity apps
-- 📱 **Mobile Companion**: Potential mobile app
-
 ## 🤝 Support
 
 ### Community
@@ -377,7 +359,7 @@ SOFTWARE.
 ## 📞 Contact
 
 - **Developer**: Woody Lee
-- **GitHub**: [Your GitHub Profile](https://github.com/your-username)
+- **GitHub**: [Your GitHub Profile](https://github.com/10kH)
 - **Support**: [Buy me a coffee](https://buymeacoffee.com/woody.lee)
 - **Extension Page**: [Chrome Web Store](https://chrome.google.com/webstore) (link to be updated)
 
