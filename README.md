@@ -1,4 +1,4 @@
-# 🛠️ Toolip - AI Tools & Website Hub
+# 🌷 Toolip - AI Tools & Website Hub
 
 > Access your favorite AI tools and websites instantly from one convenient sidebar. Built for developers and productivity enthusiasts.
 
