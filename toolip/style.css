@@ -1,0 +1,218 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    background-color: #fff;
+    min-width: 320px;
+}
+.container {
+    display: flex;
+    height: 100vh;
+}
+#sidebar {
+    width: 50px;
+    background-color: #f8f8f8;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 40px;
+    overflow-y: auto;
+}
+/* Hide scrollbar by default */
+#sidebar::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+/* Show and style scrollbar on hover */
+#sidebar:hover::-webkit-scrollbar {
+    width: 6px;
+}
+#sidebar:hover::-webkit-scrollbar-thumb {
+    background-color: #bbb;
+    border-radius: 3px;
+}
+#sidebar:hover::-webkit-scrollbar-track {
+    background-color: #f8f8f8;
+}
+#sidebar {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    transition: scrollbar-color 0.3s ease;
+}
+#sidebar:hover {
+    scrollbar-color: #bbb #f8f8f8;
+}
+#sidebar a {
+    display: block;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 30px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+#sidebar a img {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    object-fit: cover;
+}
+#preview-render {
+    flex-grow: 1;
+    height: 98%;
+    position: relative;
+}
+#preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+.credits {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+    color: #333;
+    margin-top: 8px;
+    padding-bottom: 8px;
+    border-top: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+.active {
+    opacity: 100%;
+}
+.active:hover {
+    opacity: 90%;
+}
+.un-active {
+    opacity: 40%;
+}
+.un-active:hover {
+    opacity: 100%;
+}
+
+/* Settings button */
+.settings-btn {
+    margin-top: 10px !important;
+    opacity: 0.6 !important;
+    border-top: 1px solid #ddd;
+    padding-top: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+}
+
+.settings-btn svg {
+    width: 20px;
+    height: 20px;
+    color: inherit;
+}
+
+.settings-btn:hover {
+    opacity: 1 !important;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    transform: rotate(15deg);
+}
+
+/* Dark Theme */
+body.dark-theme {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+}
+
+body.dark-theme #sidebar {
+    background-color: #2a2a2a;
+    border-right: 1px solid #444;
+}
+
+body.dark-theme #sidebar:hover::-webkit-scrollbar-thumb {
+    background-color: #666;
+}
+
+body.dark-theme #sidebar:hover::-webkit-scrollbar-track {
+    background-color: #2a2a2a;
+}
+
+body.dark-theme #sidebar:hover {
+    scrollbar-color: #666 #2a2a2a;
+}
+
+body.dark-theme #sidebar a {
+    color: #e0e0e0;
+}
+
+body.dark-theme .settings-btn:hover {
+    background-color: #3a3a3a;
+}
+
+body.dark-theme .settings-btn svg {
+    color: #e0e0e0;
+}
+
+body.dark-theme .credits {
+    background-color: #2a2a2a;
+    border-top: 1px solid #444;
+    color: #e0e0e0;
+}
+
+body.dark-theme .credits a {
+    color: #79acff !important;
+}
+
+/* Light Theme (explicit for consistency) */
+body.light-theme {
+    background-color: #fff;
+    color: #333;
+}
+
+body.light-theme #sidebar {
+    background-color: #f8f8f8;
+    border-right: 1px solid #ddd;
+}
+
+body.light-theme #sidebar:hover::-webkit-scrollbar-thumb {
+    background-color: #bbb;
+}
+
+body.light-theme #sidebar:hover::-webkit-scrollbar-track {
+    background-color: #f8f8f8;
+}
+
+body.light-theme #sidebar:hover {
+    scrollbar-color: #bbb #f8f8f8;
+}
+
+body.light-theme #sidebar a {
+    color: #333;
+}
+
+body.light-theme .settings-btn:hover {
+    background-color: #f0f0f0;
+}
+
+body.light-theme .settings-btn svg {
+    color: #333;
+}
+
+body.light-theme .credits {
+    background-color: #f8f8f8;
+    border-top: 1px solid #ddd;
+    color: #333;
+}
+
+body.light-theme .credits a {
+    color: #79acff !important;
+}
