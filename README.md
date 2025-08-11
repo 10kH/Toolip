@@ -25,15 +25,17 @@ Toolip is a sophisticated Chrome extension that transforms your browsing experie
 ### Installation
 
 #### Chrome Web Store (Recommended)
+
 1. Visit [Chrome Web Store](https://chrome.google.com/webstore) (link to be updated)
 2. Click "Add to Chrome"
 3. Grant necessary permissions
 4. Look for Toolip icon in your toolbar
 
 #### Manual Installation (Developers)
+
 ```bash
 # Clone this repository
-git clone https://github.com/your-username/toolip.git
+git clone https://github.com/10kH/toolip.git
 
 # Or download the ZIP file and extract it
 ```
@@ -44,6 +46,7 @@ git clone https://github.com/your-username/toolip.git
 4. Extension will appear in your toolbar
 
 ### First Use
+
 1. **Open Sidebar**: Click Toolip icon or press `Ctrl+M` (`Cmd+M` on Mac)
 2. **Explore Sites**: Click any icon to open that website
 3. **Customize**: Click gear icon (⚙️) to access settings
@@ -54,6 +57,7 @@ git clone https://github.com/your-username/toolip.git
 Toolip comes with 13 carefully curated websites:
 
 ### 🤖 AI Tools (6 sites)
+
 - **ChatGPT** - OpenAI's conversational AI
 - **Claude** - Anthropic's AI assistant
 - **Gemini** - Google's multimodal AI
@@ -62,6 +66,7 @@ Toolip comes with 13 carefully curated websites:
 - **Perplexity** - AI-powered search engine
 
 ### 🛠️ Development & Productivity (5 sites)
+
 - **Notion** - All-in-one workspace
 - **GitHub** - Code repository hosting
 - **Hugging Face** - Machine learning model hub
@@ -69,12 +74,14 @@ Toolip comes with 13 carefully curated websites:
 - **RunPod** - GPU cloud computing
 
 ### 🎵 Entertainment (2 sites)
+
 - **YouTube** - Video streaming platform
 - **YouTube Music** - Music streaming service
 
 ## 🔧 Technical Overview
 
 ### Architecture
+
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
 │   Background    │    │   Side Panel    │    │  Options Page   │
@@ -84,6 +91,7 @@ Toolip comes with 13 carefully curated websites:
 ```
 
 ### Tech Stack
+
 - **Framework**: Chrome Extension Manifest V3
 - **Frontend**: Vanilla HTML, CSS, JavaScript
 - **Storage**: Chrome Storage Sync API + localStorage
@@ -93,6 +101,7 @@ Toolip comes with 13 carefully curated websites:
 ### Key Features Implementation
 
 #### Session Persistence
+
 ```javascript
 // Individual iframe management for state preservation
 const iframes = new Map();
@@ -113,6 +122,7 @@ const openLink = async (url) => {
 ```
 
 #### Dynamic Site Management
+
 ```javascript
 // Real-time site collection updates
 chrome.storage.onChanged.addListener((changes, namespace) => {
@@ -124,6 +134,7 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
 ```
 
 #### Theme System
+
 ```javascript
 // Instant theme switching
 const changeTheme = async (theme) => {
@@ -155,17 +166,20 @@ toolip/
 ## 🎨 Customization
 
 ### Adding New Sites
+
 1. Open settings (gear icon in sidebar)
 2. Enter website URL and display name
 3. Optionally add custom icon URL
 4. Sites are automatically synced across devices
 
 ### Theme Customization
+
 - **Light Mode**: Clean, professional appearance for daytime use
 - **Dark Mode**: Reduced eye strain for low-light environments
 - **Instant Switch**: Changes apply immediately without restart
 
 ### Backup & Restore
+
 ```json
 // Export format
 {
@@ -180,12 +194,14 @@ toolip/
 ## 🔒 Privacy & Security
 
 ### Data Handling
+
 - **Local First**: Session data stored locally on your device
 - **Chrome Sync**: Settings synced via Google's secure infrastructure
 - **No Third-Party Servers**: Extension doesn't send data externally
 - **Minimal Data**: Only essential information stored
 
 ### Permissions Explained
+
 - **`sidePanel`**: Display the main sidebar interface
 - **`storage`**: Save your site collection and preferences
 - **`declarativeNetRequestWithHostAccess`**: Allow iframe embedding
@@ -195,9 +211,11 @@ toolip/
 ## 🚀 Version History
 
 ### v1.1.0 (August 11, 2025) - Current
+
 **Major Release: Dynamic Management & Theme System**
 
 ✅ **New Features**:
+
 - Dynamic site management (add/edit/delete/reorder)
 - Light/Dark theme system with real-time switching
 - Advanced settings page
@@ -206,6 +224,7 @@ toolip/
 - Auto favicon integration
 
 ✅ **Improvements**:
+
 - Enhanced session persistence
 - Real-time updates
 - Cloud synchronization
@@ -213,9 +232,11 @@ toolip/
 - Cleaner interface
 
 ### v1.0.0 (August 10, 2025)
+
 **Initial Release: Core Foundation**
 
 ✅ **Foundation Features**:
+
 - Sidebar interface with website navigation
 - Session persistence system
 - Custom branding and professional UI
@@ -224,11 +245,13 @@ toolip/
 ## 🛠️ Development
 
 ### Prerequisites
+
 - **Chrome**: 88+ (Manifest V3 support)
 - **Node.js**: Optional (for development tools)
 - **Git**: For version control
 
 ### Local Development
+
 ```bash
 # Clone the repository
 git clone https://github.com/your-username/toolip.git
@@ -242,12 +265,14 @@ cd toolip
 ```
 
 ### Development Workflow
+
 1. **Make Changes**: Edit files in your preferred editor
 2. **Test Locally**: Reload extension in Chrome
 3. **Debug**: Use Chrome DevTools + Extension Inspector
 4. **Package**: Create ZIP file for distribution
 
 ### Contributing
+
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
 3. Commit your changes (`git commit -m 'Add amazing feature'`)
@@ -257,12 +282,14 @@ cd toolip
 ## 📊 Performance
 
 ### Metrics
+
 - **Memory Usage**: ~10-15MB base + active iframes
 - **CPU Impact**: Minimal (<1% average)
 - **Storage**: <1MB for extension + user data
 - **Load Time**: <200ms initial load
 
 ### Optimization
+
 - Efficient iframe management (hide/show vs reload)
 - Lazy loading for better performance
 - Minimal DOM manipulation
@@ -273,26 +300,31 @@ cd toolip
 ### Common Issues
 
 **Sites not loading?**
+
 - Some websites block iframe embedding (security feature)
 - Check internet connection
 - Try refreshing the extension
 
 **Settings not saving?**
+
 - Ensure Chrome sync is enabled
 - Check available storage space
 - Try manual export/import
 
 **Theme not applying?**
+
 - Update Chrome to latest version
 - Refresh extension pages
 - Check for conflicting extensions
 
 **Performance issues?**
+
 - Close unused sites in sidebar
 - Restart Chrome browser
 - Reduce number of sites temporarily
 
 ### Getting Help
+
 1. Check the [User Guide](./USER_GUIDE.md) for detailed instructions
 2. Review [Technical Documentation](./TECHNICAL_DOCUMENTATION.md) for implementation details
 3. Search existing issues on GitHub
@@ -301,13 +333,16 @@ cd toolip
 ## 🤝 Support
 
 ### Community
+
 - **Documentation**: Comprehensive guides available
 - **Issues**: Report bugs and request features on GitHub
 - **Discussions**: Share tips and use cases
 
 ### Professional Support
+
 For business inquiries or custom development:
-- **Email**: Contact via GitHub profile
+
+- **Email**: writerwoody@gmail.com
 - **Support**: Buy me a coffee to support development
 
 ## ☕ Support Development
@@ -317,6 +352,7 @@ If Toolip enhances your productivity, consider supporting its development:
 [![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-☕-orange?style=for-the-badge&logo=buy-me-a-coffee&logoColor=white)](https://buymeacoffee.com/woody.lee)
 
 Your support helps:
+
 - 🔧 Maintain and improve existing features
 - ✨ Develop new functionality
 - 🐛 Fix bugs and issues
