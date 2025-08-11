@@ -24,14 +24,14 @@ Toolip is a sophisticated Chrome extension that transforms your browsing experie
 
 ### Installation
 
-#### Chrome Web Store (Recommended)
+#### Chrome Web Store
 
 1. Visit [Chrome Web Store](https://chrome.google.com/webstore) (link to be updated)
 2. Click "Add to Chrome"
 3. Grant necessary permissions
 4. Look for Toolip icon in your toolbar
 
-#### Manual Installation (Developers)
+#### Manual Installation
 
 ```bash
 # Clone this repository
