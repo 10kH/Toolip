@@ -2,7 +2,7 @@
 
 > Access your favorite AI tools and websites instantly from one convenient sidebar. Built for developers and productivity enthusiasts.
 
-[![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-brightgreen?logo=google-chrome)](https://chrome.google.com/webstore)
+[![Chrome Extension](https://img.shields.io/badge/Chrome-Extension-brightgreen?logo=google-chrome)](https://chromewebstore.google.com/detail/toolip/mpbdcbhlbjomcpiddlngknopajjfnmcg)
 [![Version](https://img.shields.io/badge/Version-1.1.0-blue)](./TECHNICAL_DOCUMENTATION.md)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](#license)
 [![Developer](https://img.shields.io/badge/Developer-Woody%20Lee-purple)](https://buymeacoffee.com/woody.lee)
@@ -26,7 +26,7 @@ Toolip is a sophisticated Chrome extension that transforms your browsing experie
 
 #### Chrome Web Store
 
-1. Visit [Chrome Web Store](https://chrome.google.com/webstore) (link to be updated)
+1. Visit [Chrome Web Store (Toolip)](https://chromewebstore.google.com/detail/toolip/mpbdcbhlbjomcpiddlngknopajjfnmcg)
 2. Click "Add to Chrome"
 3. Grant necessary permissions
 4. Look for Toolip icon in your toolbar
@@ -397,7 +397,7 @@ SOFTWARE.
 - **Developer**: [Woody Lee](https://www.linkedin.com/in/writerwoody/)
 - **GitHub**: [10kH](https://github.com/10kH)
 - **Support**: [Buy me a coffee](https://buymeacoffee.com/woody.lee)
-- **Extension Page**: [Chrome Web Store](https://chrome.google.com/webstore) (link to be updated)
+- **Extension Page**: [Chrome Web Store (Toolip)](https://chromewebstore.google.com/detail/toolip/mpbdcbhlbjomcpiddlngknopajjfnmcg)
 
 ---
 
